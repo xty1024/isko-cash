@@ -1,0 +1,24 @@
+div
+	p	
+		strong Reload
+		p 
+			| Would you like to reload your Isko-Cash account?
+		form.sample-form#txn-form(ng-submit="submitPostTxn()")
+			label Transaction ID
+			input.txnid(ng-model='data.txnid', type='text', name='txnid', disabled)
+			label Student ID
+			input.studentID(ng-model='data.studentid', type='text', name='studentid')
+			label Vendor ID
+			input.vendorID(ng-model='data.vendorid', type='text', name='vendorid', ng-init='data.vendorid="1"', disabled)
+			label Transaction Type
+			input.txntype(ng-model='data.txntype', type='text', name='txntype', ng-init='data.txntype="Reload"', disabled)
+			label Name of Item
+			input.txnitem(ng-model='data.txnitem', type='text', name='txnitem', ng-init='data.txnitem="Reload"', disabled)
+			label Quantity Bought
+			input.txnquantity(ng-model='data.txnquantity', type='text', name='txnquantity', ng-init='data.txnquantity="1"', disabled)
+			label Reload Amount
+			input.txnunitprice(ng-model='data.txnunitprice', type='text', name='txnunitprice', ng-change='changeTxnUnitPrice()')
+			label Total Amount
+			input.txntotalamount(ng-model='data.txntotalamount', type='text', name='txntotalamount', disabled)
+			div
+				button.btn#reload-btn Reload

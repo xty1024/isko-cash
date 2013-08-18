@@ -1,0 +1,56 @@
+div
+	p	
+		strong Reload
+		p 
+			| Would you like to reload your Isko-Cash account?
+		form.sample-form#txn-form(ng-submit="submitPostTxn()")
+			label Transaction ID
+			input.txnid(ng-model='data.txnid', type='text', name='txnid', disabled)
+			label Student ID
+			input.studentID(ng-model='data.studentid', type='text', name='studentid')
+			label Vendor ID
+			input.vendorID(ng-model='data.vendorid', type='text', name='vendorid', ng-init='data.vendorid="1"', disabled)
+			label Transaction Type
+			input.txntype(ng-model='data.txntype', type='text', name='txntype', ng-init='data.txntype="Reload"', disabled)
+			label Name of Item
+			input.txnitem(ng-model='data.txnitem', type='text', name='txnitem', ng-init='data.txnitem="Reload"', disabled)
+			label Quantity Bought
+			input.txnquantity(ng-model='data.txnquantity', type='text', name='txnquantity', ng-init='data.txnquantity="1"', disabled)
+			label Reload Amount
+			input.txnunitprice(ng-model='data.txnunitprice', type='text', name='txnunitprice', ng-change='changetxnunitprice()')
+			label Total Amount
+			input.txntotalamount(ng-model='data.txntotalamount', type='text', name='txntotalamount', disabled)
+			div
+				button.btn#reload-btn Reload
+	br
+	| Your transaction history is:
+	br
+	input(name='reload', type='button', value='Reload', onclick='alert("You have successfully reloaded " + amount.value + ".\\r\\nYour account balance is now Php XX.")')
+
+	div(mm-tabs)
+		div(mm-tab="Transaction Form")
+			form.sample-form#txn-form(ng-submit="submitGetTxn()")
+				label Transaction ID
+				input.txnid(ng-model='data.txnid', type='text', name='txnid', value="1")
+				label Student ID
+				textarea.studentid(ng-model='data.studentid', disabled, placeholder='Student ID is...', name='studentid')
+				div
+					button.btn#get-studentid-btn Retrieve Student ID
+
+	// button#donate(
+				type='submit'
+				style='width: 25px; height: 25px; background-color: white;'
+				onclick="alert(value(donor))"
+				)
+
+
+
+//	div
+		form.sample-form#post-form(ng-submit="submitPost()")
+		label Donation Amount
+		input.id(ng-model='data.id', type='text', name='amount')
+		label Donor Name
+		input.id(ng-model='data.message', placeholder='Put your name here.', name='message')
+		div
+			button.btn#post-button Yes, I will donate :)
+

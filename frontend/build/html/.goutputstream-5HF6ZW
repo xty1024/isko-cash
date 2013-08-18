@@ -1,0 +1,32 @@
+div
+	p	Name: Xty
+		br
+		| Contact Information: xty.1024@gmail.com
+
+	p 
+		strong Details about Isko-Cash:
+		br
+		| Students can pay for their purchases within the campus using their RF-enabled ID
+		br
+		| Vendors have an automated system to track their sales.
+	p Would you like to donate to our project?
+		label Donation Amount
+		input.id(type='text', name='amount')
+		label Donor Name
+		input.id(type='text', placeholder='Put your name here.', name='message')
+		button#Black(
+  		type='submit'
+		  style='width: 25px; height: 25px; background-color: black;'
+		  onclick='if you plan to use single quotes here, use double quotes outer'
+		)
+			
+
+
+//	div
+		form.sample-form#post-form(ng-submit="submitPost()")
+		label Donation Amount
+		input.id(ng-model='data.id', type='text', name='amount')
+		label Donor Name
+		input.id(ng-model='data.message', placeholder='Put your name here.', name='message')
+		div
+			button.btn#post-button Yes, I will donate :)

@@ -1,0 +1,36 @@
+div
+	p	
+		strong Reload
+		br
+		| Your transaction history is:
+	p 
+		| Would you like to reload your Isko-Cash account?
+		label Reload Amount
+		input(id='amount', type='text', style='height: 60px')		
+		br
+		input(name='reload', type='button', value='Reload', onclick='alert("You have successfully reloaded " + amount.value + ".\\r\\nYour account balance is now Php XX.")')
+		br
+		input(id='btnA', type='button', value='Test')
+
+script
+	$("#btnA").click(function() {
+		alert("Test");
+	});
+
+	// button#donate(
+				type='submit'
+				style='width: 25px; height: 25px; background-color: white;'
+				onclick="alert(value(donor))"
+				)
+
+
+
+//	div
+		form.sample-form#post-form(ng-submit="submitPost()")
+		label Donation Amount
+		input.id(ng-model='data.id', type='text', name='amount')
+		label Donor Name
+		input.id(ng-model='data.message', placeholder='Put your name here.', name='message')
+		div
+			button.btn#post-button Yes, I will donate :)
+

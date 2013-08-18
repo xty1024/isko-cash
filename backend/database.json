@@ -1,0 +1,7 @@
+{
+  "driver": "postgresql",
+  "host": "localhost",
+  "user": "momentum",
+  "password": "momentum-password",
+  "database": "angular_momentum_db"
+}

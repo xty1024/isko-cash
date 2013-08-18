@@ -1,0 +1,91 @@
+!!! 5
+html
+  head
+    meta(charset='utf-8')
+    title Transaction History
+    link(rel='stylesheet', type='text/css', href='lib/bootstrap/css/bootstrap.css')
+  body
+    .container
+      form.form-horizontal
+        fieldset
+          legend Transaction History
+          .control-group
+            label.control-label(for='remaining') Remaining Balance
+            .controls
+              input#remaining.input-xlarge(type='text', value='P 330.00', readonly='readonly')
+          #accordion2.accordion
+            .accordion-group
+              .accordion-heading
+                a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseOne')
+                  span August 17
+                  span(style='float: right;') P 130.00
+              #collapseOne.accordion-body.collapse.in
+                .accordion-inner
+                  table.table.table-striped.table-bordered.table-condensed.table-hover
+                    thead
+                      tr
+                        th Store
+                        th Item
+                        th Qty
+                        th Cost
+                    tr
+                      td NIGS Canteen
+                      td Meal
+                      td 1
+                      td P 60.00
+                    tr
+                      td NIGS Canteen
+                      td Take out
+                      td 1
+                      td P 5.00
+                    tr
+                      td Blessings SC
+                      td Photocopy - short
+                      td 100
+                      td P 65.00
+            .accordion-group
+              .accordion-heading
+                a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseTwo')
+                  span August 16
+                  span(style='float: right;') P 50.00
+              #collapseTwo.accordion-body.collapse
+                .accordion-inner
+                  table.table.table-striped.table-bordered.table-condensed.table-hover
+                    thead
+                      tr
+                        th Store
+                        th Item
+                        th Qty
+                        th Cost
+                    tr
+                      td CS Canteen
+                      td Meal
+                      td 1
+                      td P 50.00
+            .accordion-group
+              .accordion-heading
+                a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseThree')
+                  span August 15
+                  span(style='float: right;') P 65.00
+              #collapseThree.accordion-body.collapse
+                .accordion-inner
+                  table.table.table-striped.table-bordered.table-condensed.table-hover
+                    thead
+                      tr
+                        th Store
+                        th Item
+                        th Qty
+                        th Cost
+                    tr
+                      td CASAA
+                      td Meal
+                      td 1
+                      td P 55.00
+          .form-actions
+            //
+              <button type="submit" class="btn btn-primary">View Older</button>   
+            button.btn.btn-primary(type='submit') Print
+      //
+        container
+    script(src='http://code.jquery.com/jquery.js')
+    script(src='lib/bootstrap/js/bootstrap.min.js')

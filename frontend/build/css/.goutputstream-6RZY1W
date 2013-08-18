@@ -1,0 +1,13 @@
+.sample-form
+  input, textarea 
+    // Make the text boxes wide enough
+    width 300px
+    height 40px
+  button
+    // add spacing between buttons
+    font-weight bold
+.home-form
+  img
+    width 150px
+    height 150px
+  font-size 20px

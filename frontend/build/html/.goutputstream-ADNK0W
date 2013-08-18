@@ -1,0 +1,14 @@
+div
+    a(href="/#/") Click here to go back to the main page
+  .row
+    h3 Forms
+        p 
+          strong Explanation:
+          |  GET gets a message from the server given an id.
+        form.sample-form#get-form(ng-submit="submitGet()")
+          label ID
+          input.id(ng-model='data.id', type='text', name='id', value="1")
+          label Message
+          textarea.message(ng-model='data.message', disabled, placeholder='Message goes here...', name='message')
+          div
+            button.btn#get-button Retrieve Message

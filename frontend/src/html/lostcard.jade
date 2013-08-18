@@ -1,0 +1,13 @@
+div
+	p	
+		strong Lost Card
+	p 
+		| Would you like to disable your Isko-Cash account because your card was lost or stolen?
+	label Student ID
+	input.studentID(ng-model='data.studentid', type='text', name='studentid', style='height: 40px')
+	form.sample-form#lostcard-form(ng-submit="submitPutLostCard()")
+		div
+			button.btn#confirmlost-btn Yes, my card was lost or stolen
+	form.sample-form#cardstatus-form(ng-submit="submitGetCardStatus()")
+		div
+			button.btn#cardstatus-btn No, i just want to view the status of my card

@@ -1,0 +1,26 @@
+div
+	form.home-form#home
+		h3 Welcome to the home page :-)
+		.container
+			form.form-horizontal
+				label(style='font-size=40px') Your Remaining Balance is:
+				input(type='text', style='height:40px', disabled)
+		p.lead What do you want to do?	
+		<a href="/#/"> <img src="/assets/nameplate.png"> </a>
+		| Account Profile
+		br	
+		<a href="/#/transhist"> <img src="/assets/notes.png"> </a>
+		| Transaction History
+		br
+		<a href="/#/"> <img src="/assets/table-money-icon.png"> </a>
+		| Balance Inquiry
+		br
+		<a href="/#/reload"> <img src="/assets/money-add-icon.png"> </a>
+		| Reload
+		br
+		<a href="/#/lostcard"> <img src="/assets/user-thief-icon.png"> </a>
+		| Lost / Stolen Card
+		h3 Retailers' Module
+		br	
+		<a href="/#/payment"> <img src="/assets/payment.png"> </a>
+		| Payment

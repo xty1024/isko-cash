@@ -1,0 +1,13 @@
+div
+	h1 Welcome to the home page :-)
+	p.lead Your remaining balance is Php ---.
+	p.lead What do you want to do?	
+	|	Account Profile
+	br
+	| Transaction History
+	br
+	| Balance Inquiry
+	br
+	| Reload
+	br
+	| Lost / Stolen Card

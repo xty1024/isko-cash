@@ -1,0 +1,48 @@
+!!! 5
+html
+  head
+    meta(charset='utf-8')
+    title My Profile
+    link(rel='stylesheet', type='text/css', href='lib/bootstrap/css/bootstrap.css')
+  body
+    .container
+      form.form-horizontal
+        fieldset
+          legend  Dela Cruz, Juan 
+          .control-group
+            label.control-label(for='sn') Student ID
+            .controls
+              input#sn.input-xlarge(type='text', value='2000-00000', readonly='readonly')
+          .control-group
+            label.control-label(for='course') Degree Program
+            .controls
+              input#course.input-xlarge(type='text', value='BS Computer Science', readonly='readonly')
+          h3 Linked Bank Accounts
+          .control-group
+            label.control-label(for='bank') Bank
+            .controls
+              input#bank.input-xlarge(type='text', value='BPI', readonly='readonly')
+          .control-group
+            label.control-label(for='aname') Account Name
+            .controls
+              input#aname.input-xlarge(type='text', value='Juan Dela Cruz', readonly='readonly')
+          .control-group
+            label.control-label(for='anum') Account Number
+            .controls
+              input#anum.input-xlarge(type='text', value='0220303034', readonly='readonly')
+          h3 Security Question
+          .control-group
+            label.control-label(for='sq') Security Question
+            .controls
+              input#sq.input-xlarge(type='text', value='Who\'s your daddy?')
+          .control-group
+            label.control-label(for='sa') Security Answer
+            .controls
+              input#sa.input-xlarge(type='text', value='Felimon')
+          .form-actions
+            button.btn.btn-primary(type='submit') Submit
+            button.btn.btn-danger(type='submit') Back
+      //
+        container
+    script(src='http://code.jquery.com/jquery-latest.min.js')
+    script(src='lib/bootstrap/js/bootstrap.js')

@@ -1,0 +1,15 @@
+.sample-form input,
+.sample-form textarea {
+  width: 300px;
+  height: 40px;
+}
+.sample-form button {
+  font-weight: bold;
+}
+.home-form {
+  font-size: 20px;
+}
+.home-form img {
+  width: 150px;
+  height: 150px;
+}

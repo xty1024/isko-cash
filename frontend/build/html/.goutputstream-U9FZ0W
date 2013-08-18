@@ -1,0 +1,15 @@
+div
+	h3 Welcome to the home page :-)
+	p.lead Your remaining balance is Php ---.
+	p.lead What do you want to do?	
+	a(href="/#/")
+	|	img "nameplate.png"
+	| Account Profile
+	br	
+	a(href="/#/")| Transaction History
+	br
+	a(href="/#/")| Balance Inquiry
+	br
+	a(href="/#/reload")| Reload
+	br
+	a(href="/#/lostcard")| Lost / Stolen Card

@@ -1,0 +1,15 @@
+SQL Create Statements
+
+CREATE TABLE Transactions
+(
+TxnID bigserial PRIMARY KEY,
+StudentID varchar(9),
+VendorID varchar(9),
+TxnDateTime timestamp,
+TxnType varchar(25),
+TxnItem varchar(50),
+TxnQuantity int,
+TxnUnitPrice decimal,
+TxnTotalAmount decimal,
+Balance decimal
+);
