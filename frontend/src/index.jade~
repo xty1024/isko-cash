@@ -21,11 +21,12 @@ html(ng-app="Momentum")
     script(src='/js/transaction.js', type='text/javascript')
     script(src='/js/lostcard.js', type='text/javascript')
     script(src='/js/balance.js', type='text/javascript')
+    script(src='/js/item.js', type='text/javascript')
 
   body
     .container
       .row
-      h1 Isko-Cash
+      h1 a(href="/#/message") Isko-Cash
       p.lead Cashless transactions within the campus.
       div(ng-view)
 

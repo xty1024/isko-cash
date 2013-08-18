@@ -20,6 +20,10 @@ momentum.config ["$routeProvider", "$locationProvider", ($routeProvider, $locati
   $routeProvider.when "",
     redirectTo: "/home"
 
+  $routeProvider.when "/acctprofile",
+    templateUrl: "/html/acctprofile.html"
+    controller: 'TxnController'
+
   $routeProvider.when "/transhist",
     templateUrl: "/html/transhist.html"
     controller: 'TxnController'

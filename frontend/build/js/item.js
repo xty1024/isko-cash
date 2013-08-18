@@ -17,6 +17,7 @@
     '$scope', '$location', '$http', function($scope, $location, $http) {
       $scope.data = {
         itemid: "",
+        vendorid: "2",
         itemname: "",
         itemdesc: "",
         itemunitprice: "",
@@ -27,52 +28,41 @@
           itemname: "",
           itemdesc: "",
           itemunitprice: "",
-          itemunitmeasure: ""
+          itemunitmeasure: "",
+          availabletoday: ""
         }
       ];
-      $scope.addItem = function() {
-        $scope.items.push({
-          txnitem: $scope.data.txnitem,
-          txnquantity: $scope.data.txnquantity,
-          txnunitprice: $scope.data.txnunitprice,
-          txntotalamount: $scope.data.txntotalamount
-        });
-        $scope.data.txnitem = "";
-        $scope.data.txnquantity = "";
-        $scope.data.txnunitprice = "";
-        return $scope.data.txntotalamount = "";
-      };
-      $scope.submitGetTxn = function() {
+      $scope.submitGetItem = function() {
         return $http.get("/api/item/" + $scope.data.txnid).success(function(response) {
           return $scope.data.studentid = response;
         }).error(function(e) {
           return alert("Something went wrong. That Transaction ID may not exist.\n" + e);
         });
       };
-      $scope.submitPostTxn = function() {
+      $scope.submitGetItems = function() {
+        return $http.get("/api/item/" + $scope.data.vendorid).success(function(response) {
+          return $scope.items = response;
+        }).error(function(e) {
+          return alert("Something went wrong. The Vendor ID may not exist.\n" + e);
+        });
+      };
+      $scope.submitPostItem = function() {
         var submitTxn;
 
-        submitTxn = confirm("Do you want to submit the transaction?");
+        submitTxn = confirm("Do you want to add the item?");
         if (submitTxn) {
-          $http.post("/api/item", {
-            studentid: $scope.data.studentid,
+          return $http.post("/api/item", {
             vendorid: $scope.data.vendorid,
-            txntype: $scope.data.txntype,
-            txnitem: $scope.data.txnitem,
-            txnquantity: $scope.data.txnquantity,
-            txnunitprice: $scope.data.txnunitprice,
-            txntotalamount: $scope.data.txntotalamount
+            itemname: $scope.data.itemname,
+            itemdesc: $scope.data.itemdesc,
+            itemunitprice: $scope.data.itemunitprice,
+            itemunitmeasure: $scope.data.itemunitmeasure
           }).success(function(response) {
-            if (response.length > 20) {
-              return alert("Cannot complete transaction. \n" + response);
-            } else {
-              return alert("Successfully completed transaction! \nYour balance is now: Php " + response);
-            }
+            return alert("Successfully completed adding item!");
+          }).error(function(response) {
+            return alert("Something went wrong." + response);
           });
-        } else {
-          alert("Did not submit transaction.");
         }
-        return $location.path("/home").replace();
       };
       $scope.submitPutTxn = function() {
         return $http.put("/api/item/" + $scope.data.id, {

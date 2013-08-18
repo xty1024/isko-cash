@@ -11,5 +11,15 @@ TxnItem varchar(50),
 TxnQuantity int,
 TxnUnitPrice decimal,
 TxnTotalAmount decimal,
-Balance decimal,
+Balance decimal
+);
+
+CREATE TABLE Items
+(
+ItemID bigserial PRIMARY KEY,
+VendorID varchar(9),
+ItemName varchar(50),
+ItemDesc varchar(100),
+ItemUnitPrice decimal,
+ItemUnitMeasure varchar(50)
 );

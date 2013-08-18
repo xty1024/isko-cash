@@ -2,12 +2,6 @@ div
 	p	
 		strong Payment
 		p 
-			| Available Items for Today
-			div(data-ng-init='submitGetAvailableItems()')
-			table
-				tr(ng-repeat='itemavailable in itemsavailable')
-					td 
-						button.btn {{itemavailable.itemname}}
 			| Please input the details of your transaction?
 		form.sample-form#txn-form
 			label Transaction ID

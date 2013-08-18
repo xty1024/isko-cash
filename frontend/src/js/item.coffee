@@ -14,6 +14,7 @@ momentum.controller "ItemController", ['$scope', '$location', '$http', ($scope, 
 
   $scope.data =
     itemid: ""
+    vendorid: "2"
     itemname: ""
     itemdesc: ""
     itemunitprice: ""
@@ -24,45 +25,36 @@ momentum.controller "ItemController", ['$scope', '$location', '$http', ($scope, 
     itemdesc: ""
     itemunitprice: ""
     itemunitmeasure: ""
+    availabletoday: ""
   ]
 
-  $scope.addItem = ->
-    $scope.items.push
-      txnitem: $scope.data.txnitem
-      txnquantity: $scope.data.txnquantity
-      txnunitprice: $scope.data.txnunitprice
-      txntotalamount: $scope.data.txntotalamount
-    $scope.data.txnitem = ""
-    $scope.data.txnquantity = ""
-    $scope.data.txnunitprice = ""
-    $scope.data.txntotalamount = ""
-
-  $scope.submitGetTxn = ->
+  $scope.submitGetItem = ->
     $http.get("/api/item/#{$scope.data.txnid}")
     .success (response) ->
       $scope.data.studentid = response
     .error (e) ->
       alert "Something went wrong. That Transaction ID may not exist.\n" + e
 
-  $scope.submitPostTxn = ->
-    submitTxn = confirm "Do you want to submit the transaction?"
+  $scope.submitGetItems = ->
+    $http.get("/api/item/#{$scope.data.vendorid}")
+    .success (response) ->
+      $scope.items = response
+    .error (e) ->
+      alert "Something went wrong. The Vendor ID may not exist.\n" + e
+
+  $scope.submitPostItem = ->
+    submitTxn = confirm "Do you want to add the item?"
     if submitTxn      
       $http.post("/api/item",
-        studentid: $scope.data.studentid
         vendorid: $scope.data.vendorid
-        txntype: $scope.data.txntype
-        txnitem: $scope.data.txnitem
-        txnquantity: $scope.data.txnquantity
-        txnunitprice: $scope.data.txnunitprice
-        txntotalamount: $scope.data.txntotalamount
+        itemname: $scope.data.itemname
+        itemdesc: $scope.data.itemdesc
+        itemunitprice: $scope.data.itemunitprice
+        itemunitmeasure: $scope.data.itemunitmeasure
       ).success (response) ->
-        if response.length > 20      
-          alert "Cannot complete transaction. \n" + response
-        else
-          alert "Successfully completed transaction! \nYour balance is now: Php " + response
-    else
-      alert "Did not submit transaction."
-    $location.path("/home").replace()
+        alert "Successfully completed adding item!"
+      .error (response) ->
+        alert "Something went wrong." + response
 
   $scope.submitPutTxn = ->
     $http.put("/api/item/#{$scope.data.id}",

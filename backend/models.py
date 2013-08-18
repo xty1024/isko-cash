@@ -21,10 +21,15 @@ class Consumer(Base):
     statusdate = Column(DateTime)
     status = Column(String(25))
 
-    def __init__(self, studentid, statusdate, status):
-      self.studentid = studentid
-      self.statusdate = statusdate
-      self.status = status
+class Item(Base):
+    __tablename__ = 'items'
+    itemid = Column(Integer, primary_key=True)
+    vendorid = Column(String(9))
+    itemname = Column(String(50))
+    itemdesc = Column(String(100))
+    itemunitprice = Column(Numeric(precision=9, scale=6))
+    itemunitmeasure = Column(String(50))
+    availabletoday = Column(Boolean, unique=False, default=False)
 
 class Message(Base):
     __tablename__ = 'messages'

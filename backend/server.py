@@ -2,7 +2,7 @@
 import json # This is a library for encoding objects into JSON
 from flask import Flask, request # This the microframework library we'll use to build our backend.
 import sqlalchemy
-from models import Transaction, Consumer, Message
+from models import Transaction, Consumer, Item, Message
 from database import db_session, db_init
 from datetime import datetime
 from decimal import *
@@ -110,6 +110,13 @@ def get_balance(studentid):
 #####################################################################################################
 
 
+@app.route('/transaction/<int:vendorid>/', strict_slashes=False)
+def get_availableitems(vendorid):
+    items = db_session.query(Item).filter_by(vendorid=str(vendorid), availabletoday=True)
+    jsonable = [{'itemid': itm.itemid, 'itemname': itm.itemname, 'itemdesc': itm.itemdesc, 'itemunitprice': str(itm.itemunitprice), 'itemunitmeasure': itm.itemunitmeasure} for itm in items]
+    return json.dumps(jsonable)
+
+
 @app.route('/transaction/<int:txnid>/', strict_slashes=False)
 def get_transaction(txnid):
     try:
@@ -190,6 +197,43 @@ def put_consumer(studentid):
 #
 #
 # End of Functions related to LOST CARD
+#
+#
+#####################################################################################################
+
+
+#####################################################################################################
+#
+#
+# Beginning of Functions related to ITEMS
+#
+#
+#####################################################################################################
+
+
+@app.route('/item/<int:vendorid>/', strict_slashes=False)
+def get_items(vendorid):
+    items = db_session.query(Item).filter_by(vendorid=str(vendorid))
+    jsonable = [{'itemid': itm.itemid, 'itemname': itm.itemname, 'itemdesc': itm.itemdesc, 'itemunitprice': str(itm.itemunitprice), 'itemunitmeasure': itm.itemunitmeasure, 'availabletoday': itm.availabletoday} for itm in items]
+    return json.dumps(jsonable)
+
+
+@app.route('/item/', methods=['POST'], strict_slashes=False)
+def post_item():
+    vendorid = request.json['vendorid']
+    itemname = request.json['itemname']
+    itemdesc = request.json['itemdesc']
+    itemunitprice = request.json['itemunitprice']
+    itemunitmeasure = request.json['itemunitmeasure']
+    item = Item(vendorid=vendorid, itemname=itemname, itemdesc=itemdesc, itemunitprice=itemunitprice, itemunitmeasure=itemunitmeasure)
+    db_session.add(item)
+    db_session.commit()
+    return str(item.itemid)
+
+#####################################################################################################
+#
+#
+# End of Functions related to ITEMS
 #
 #
 #####################################################################################################

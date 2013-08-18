@@ -1,9 +1,28 @@
 div
 	p	
 		strong Items Being Sold
-		p 
-			| Please input the details of your transaction?
 		form.sample-form#item-form
+		div(data-ng-init='submitGetItems()')
+			table
+				thead
+					tr
+						th Item
+						th Quantity
+						th Unit Price
+						th Total Amount
+						th Available Today?
+				tbody
+					tr(ng-repeat = 'item in items')
+						td {{item.itemname}}
+						td {{item.itemdesc}}
+						td {{item.itemunitprice}}
+						td {{item.itemunitmeasure}}
+						td
+							input(type='checkbox', ng-model='item.availabletoday')
+			div
+				button.btn#additemtoday-btn(ng-click='submitPutItemToday(user, $event)') Add These Items for Today
+		p 
+			| Want to add an item? Please input the details of your item:
 			label Item ID
 			input.itemid(ng-model='data.itemid', type='text', name='itemid', disabled)
 			label Item Name
@@ -14,20 +33,6 @@ div
 			input.itemunitprice(ng-model='data.itemunitprice', type='text', name='itemunitprice')
 			label Unit of Measure
 			input.itemunitmeasure(ng-model='data.itemunitmeasure', type='text', name='itemunitmeasure')
-			div(data-ng-init='submitGetItems()')
-				table
-					thead
-						tr
-							th Item Name
-							th Item Description
-							th Unit Price
-							th Unit of Measure
-					tbody
-						tr(ng-repeat='item in items')
-							td {{item.itemname}}
-							td {{item.itemdesc}}
-							td {{item.itemunitprice}}
-							td {{item.itemunitmeasure}}
 			div
-				button.btn#additem-btn(ng-click='submitPostItemToday(user, $event)') Add These Items for Today
+				button.btn#additem-btn(ng-click='submitPostItem(user, $event)') Add This Item To My List
 

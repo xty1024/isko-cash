@@ -17,14 +17,23 @@
     '$scope', '$location', '$http', function($scope, $location, $http) {
       $scope.data = {
         txnid: "",
-        studentid: "",
-        vendorid: "",
+        studentid: "201354321",
+        vendorid: "2",
         txntype: "",
         txnitem: "",
         txnquantity: "",
         txnunitprice: "",
         txntotalamount: ""
       };
+      $scope.itemsavailable = [
+        {
+          itemid: "",
+          itemname: "",
+          itemdesc: "",
+          itemunitprice: "",
+          itemunitmeasure: ""
+        }
+      ];
       $scope.items = [
         {
           txnitem: "",
@@ -47,6 +56,13 @@
         $scope.data.txnquantity = "";
         $scope.data.txnunitprice = "";
         return $scope.data.txntotalamount = "";
+      };
+      $scope.submitGetAvailableItems = function() {
+        return $http.get("/api/transaction/" + $scope.data.vendorid).success(function(response) {
+          return $scope.itemsavailable = response;
+        }).error(function(e) {
+          return alert("Something went wrong.\n" + e);
+        });
       };
       $scope.submitGetTxn = function() {
         return $http.get("/api/transaction/" + $scope.data.txnid).success(function(response) {

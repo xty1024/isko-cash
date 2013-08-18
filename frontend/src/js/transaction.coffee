@@ -14,13 +14,21 @@ momentum.controller "TxnController", ['$scope', '$location', '$http', ($scope, $
 
   $scope.data =
     txnid: ""
-    studentid: ""
-    vendorid: ""
+    studentid: "201354321"
+    vendorid: "2"
     txntype: ""
     txnitem: ""
     txnquantity: ""
     txnunitprice: ""
     txntotalamount: ""
+
+  $scope.itemsavailable = [
+    itemid: ""
+    itemname: ""
+    itemdesc: ""
+    itemunitprice: ""
+    itemunitmeasure: ""
+  ]
 
   $scope.items = [
     txnitem: ""
@@ -42,6 +50,13 @@ momentum.controller "TxnController", ['$scope', '$location', '$http', ($scope, $
     $scope.data.txnquantity = ""
     $scope.data.txnunitprice = ""
     $scope.data.txntotalamount = ""
+
+  $scope.submitGetAvailableItems = ->
+    $http.get("/api/transaction/#{$scope.data.vendorid}")
+    .success (response) ->
+      $scope.itemsavailable = response
+    .error (e) ->
+      alert "Something went wrong.\n" + e
 
   $scope.submitGetTxn = ->
     $http.get("/api/transaction/#{$scope.data.txnid}")

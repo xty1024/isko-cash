@@ -14,13 +14,20 @@ momentum.controller "TxnController", ['$scope', '$location', '$http', ($scope, $
 
   $scope.data =
     txnid: ""
-    studentid: ""
-    vendorid: ""
+    studentid: "201354321"
+    vendorid: "2"
     txntype: ""
     txnitem: ""
     txnquantity: ""
     txnunitprice: ""
     txntotalamount: ""
+
+  $scope.itemsavailable = [
+    txnitem: ""
+    txnquantity: ""
+    txnunitprice: ""
+    txntotalamount: ""
+  ]
 
   $scope.items = [
     txnitem: ""
@@ -43,6 +50,13 @@ momentum.controller "TxnController", ['$scope', '$location', '$http', ($scope, $
     $scope.data.txnunitprice = ""
     $scope.data.txntotalamount = ""
 
+  $scope.submitGetAvailableItems = ->
+    $http.get("/api/transaction/#{$scope.data.vendorid}")
+    .success (response) ->
+      $scope.itemsavailable = response
+    .error (e) ->
+      alert "Something went wrong.\n" + e
+
   $scope.submitGetTxn = ->
     $http.get("/api/transaction/#{$scope.data.txnid}")
     .success (response) ->
@@ -51,7 +65,7 @@ momentum.controller "TxnController", ['$scope', '$location', '$http', ($scope, $
       alert "Something went wrong. That Transaction ID may not exist.\n" + e
 
   $scope.submitPostTxn = ->
-    submitTxn = confirm "Do you want to submit the payments?"
+    submitTxn = confirm "Do you want to submit the transaction?"
     if submitTxn      
       $http.post("/api/transaction",
         studentid: $scope.data.studentid
