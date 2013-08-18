@@ -30,22 +30,27 @@ momentum.controller "TxnController", ['$scope', '$location', '$http', ($scope, $
     itemunitmeasure: ""
   ]
 
-  $scope.items = [
+  $scope.itemsorder = [
     txnitem: ""
-    txnquantity: ""
     txnunitprice: ""
+    txnquantity: ""
+    txnunitmeasure: ""
     txntotalamount: ""
   ]
 
   $scope.changeTxnUnitPrice = ->
     $scope.data.txntotalamount = $scope.data.txnunitprice * $scope.data.txnquantity
 
-  $scope.addItem = ->
-    $scope.items.push
-      txnitem: $scope.data.txnitem
-      txnquantity: $scope.data.txnquantity
-      txnunitprice: $scope.data.txnunitprice
-      txntotalamount: $scope.data.txntotalamount
+  $scope.addItemOrder = (txnitem, txnunitprice, txnunitmeasure) ->
+    alert txnitem
+    $scope.itemsorder.txnquantity = 1
+    $scope.itemsorder.txntotalamount = $scope.itemsorder.txnquantity * txnunitprice
+    $scope.itemsorder.push
+      txnitem: txnitem
+      txnunitprice: txnunitprice
+      txnquantity: $scope.itemsorder.txnquantity
+      txnunitmeasure: txnunitmeasure
+      txntotalamount: $scope.itemsorder.txntotalamount
     $scope.data.txnitem = ""
     $scope.data.txnquantity = ""
     $scope.data.txnunitprice = ""

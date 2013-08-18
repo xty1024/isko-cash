@@ -34,23 +34,28 @@
           itemunitmeasure: ""
         }
       ];
-      $scope.items = [
+      $scope.itemsorder = [
         {
           txnitem: "",
-          txnquantity: "",
           txnunitprice: "",
+          txnquantity: "",
+          txnunitmeasure: "",
           txntotalamount: ""
         }
       ];
       $scope.changeTxnUnitPrice = function() {
         return $scope.data.txntotalamount = $scope.data.txnunitprice * $scope.data.txnquantity;
       };
-      $scope.addItem = function() {
-        $scope.items.push({
-          txnitem: $scope.data.txnitem,
-          txnquantity: $scope.data.txnquantity,
-          txnunitprice: $scope.data.txnunitprice,
-          txntotalamount: $scope.data.txntotalamount
+      $scope.addItemOrder = function(txnitem, txnunitprice, txnunitmeasure) {
+        alert(txnitem);
+        $scope.itemsorder.txnquantity = 1;
+        $scope.itemsorder.txntotalamount = $scope.itemsorder.txnquantity * txnunitprice;
+        $scope.itemsorder.push({
+          txnitem: txnitem,
+          txnunitprice: txnunitprice,
+          txnquantity: $scope.itemsorder.txnquantity,
+          txnunitmeasure: txnunitmeasure,
+          txntotalamount: $scope.itemsorder.txntotalamount
         });
         $scope.data.txnitem = "";
         $scope.data.txnquantity = "";

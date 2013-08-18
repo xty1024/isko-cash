@@ -7,9 +7,28 @@ div
 			table
 				tr(ng-repeat='itemavailable in itemsavailable')
 					td 
-						button.btn {{itemavailable.itemname}}
-			| Please input the details of your transaction?
+						button.btn#add-item-btn(ng-click='addItemOrder(itemavailable.itemname, itemavailable.itemunitprice, itemavailable.itemunitmeasure)') {{itemavailable.itemname}}
 		form.sample-form#txn-form
+			div
+				table
+					thead
+						tr
+							th Item Name
+							th Unit Price
+							th Quantity
+							th Unit Measure
+							th Total Amount
+					tbody
+						tr(ng-repeat='item in itemsorder')
+							td {{item.txnitem}}
+							td {{item.txnunitprice}}
+							td {{item.txnquantity}}
+							td {{item.txnunitmeasure}}
+							td {{item.txntotalamount}}
+			div
+				button.btn#payment-btn(ng-click='submitPostTxn(user, $event)') Submit Payment
+
+			p Please input the details of your transaction?
 			label Transaction ID
 			input.txnid(ng-model='data.txnid', type='text', name='txnid', disabled)
 			label Student ID
@@ -28,19 +47,4 @@ div
 			input.txntotalamount(ng-model='data.txntotalamount', type='text', name='txntotalamount', disabled)
 			div
 				button.btn#add-item-btn(ng-click='addItem()') Add Item(s)
-				table
-					thead
-						tr
-							th Item
-							th Quantity
-							th Unit Price
-							th Total Amount
-					tbody
-						tr(ng-repeat='item in items')
-							td {{item.txnitem}}
-							td {{item.txnquantity}}
-							td {{item.txnunitprice}}
-							td {{item.txntotalamount}}
-			div
-				button.btn#payment-btn(ng-click='submitPostTxn(user, $event)') Submit Payment
 

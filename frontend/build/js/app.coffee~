@@ -5,6 +5,7 @@ momentum = angular.module "Momentum", [
   "Momentum.txncontrollers"
   "Momentum.lostcardcontrollers"
   "Momentum.balcontrollers"
+  "Momentum.itemcontrollers"
 ]
 
 momentum.config ["$routeProvider", "$locationProvider", ($routeProvider, $locationProvider) ->
@@ -34,6 +35,10 @@ momentum.config ["$routeProvider", "$locationProvider", ($routeProvider, $locati
   $routeProvider.when "/payment",
     templateUrl: "/html/payment.html"
     controller: 'TxnController'
+
+  $routeProvider.when "/items",
+    templateUrl: "/html/items.html"
+    controller: 'ItemController'
 
   $routeProvider.when "/404",
     templateUrl: "/html/404.html"
