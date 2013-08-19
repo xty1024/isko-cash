@@ -17,7 +17,7 @@ momentum.controller "TxnController", ['$scope', '$location', '$http', ($scope, $
     studentid: "201354321"
     vendorid: "2"
     txntype: ""
-    txnitemid: ""
+    txnitem: ""
     txnquantity: ""
     txnunitprice: ""
     txntotalamount: ""
@@ -31,8 +31,7 @@ momentum.controller "TxnController", ['$scope', '$location', '$http', ($scope, $
   ]
 
   $scope.itemsorder = [
-    txnitemid: ""
-    txnitemname: ""
+    txnitem: ""
     txnunitprice: ""
     txnquantity: ""
     txnunitmeasure: ""
@@ -42,23 +41,26 @@ momentum.controller "TxnController", ['$scope', '$location', '$http', ($scope, $
   $scope.changeTxnUnitPrice = ->
     $scope.data.txntotalamount = $scope.data.txnunitprice * $scope.data.txnquantity
 
+  $scope.addItemOrder = (txnitem, txnunitprice, txnunitmeasure) ->
+    $scope.itemsorder.txnquantity = prompt("Enter Quantity for '" + txnitem + "' : ")
+    $scope.itemsorder.txntotalamount = $scope.itemsorder.txnquantity * txnunitprice
+    $scope.itemsorder.push
+      txnitem: txnitem
+      txnunitprice: txnunitprice
+      txnquantity: $scope.itemsorder.txnquantity
+      txnunitmeasure: txnunitmeasure
+      txntotalamount: $scope.itemsorder.txntotalamount
+    $scope.data.txnitem = ""
+    $scope.data.txnquantity = ""
+    $scope.data.txnunitprice = ""
+    $scope.data.txntotalamount = ""
+
   $scope.submitGetAvailableItems = ->
     $http.get("/api/transaction/#{$scope.data.vendorid}")
     .success (response) ->
       $scope.itemsavailable = response
     .error (e) ->
-      alert "Something went wrong.\n" + e  
-
-  $scope.addItemOrder = (txnitemid, txnitemname, txnunitprice, txnunitmeasure) ->
-    txnquantity = prompt "Enter Quantity for '" + txnitemname + "' : "
-    txntotalamount = txnquantity * txnunitprice
-    $scope.itemsorder.push
-      txnitemid: txnitemid
-      txnitemname: txnitemname
-      txnunitprice: txnunitprice
-      txnquantity: txnquantity
-      txnunitmeasure: txnunitmeasure
-      txntotalamount: txntotalamount
+      alert "Something went wrong.\n" + e
 
   $scope.submitGetTxn = ->
     $http.get("/api/transaction/#{$scope.data.txnid}")
@@ -70,24 +72,22 @@ momentum.controller "TxnController", ['$scope', '$location', '$http', ($scope, $
   $scope.submitPostTxn = ->
     submitTxn = confirm "Do you want to submit the transaction?"
     if submitTxn      
-      $scope.itemsorder.forEach (itemorder) ->
-        if itemorder.txnitemid > 0          
-          $http.post("/api/transaction",
-            studentid: $scope.data.studentid
-            vendorid: $scope.data.vendorid
-            txntype: $scope.data.txntype
-            txnitemid: itemorder.txnitemid
-            txnquantity: itemorder.txnquantity
-            txnunitprice: itemorder.txnunitprice
-            txntotalamount: itemorder.txntotalamount
-          ).success (response) ->
-            if response.length > 20      
-              alert "Cannot complete transaction. \n" + response
-            else
-              alert "Successfully completed transaction! \nYour balance is now: Php " + response
-              $location.path("/home").replace()
+      $http.post("/api/transaction",
+        studentid: $scope.data.studentid
+        vendorid: $scope.data.vendorid
+        txntype: $scope.data.txntype
+        txnitem: $scope.data.txnitem
+        txnquantity: $scope.data.txnquantity
+        txnunitprice: $scope.data.txnunitprice
+        txntotalamount: $scope.data.txntotalamount
+      ).success (response) ->
+        if response.length > 20      
+          alert "Cannot complete transaction. \n" + response
+        else
+          alert "Successfully completed transaction! \nYour balance is now: Php " + response
     else
       alert "Did not submit transaction."
+    $location.path("/home").replace()
 
   $scope.submitPutTxn = ->
     $http.put("/api/reload/#{$scope.data.id}",

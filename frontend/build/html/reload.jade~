@@ -13,11 +13,11 @@ div
 			label Transaction Type
 			input.txntype(ng-model='data.txntype', type='text', name='txntype', ng-init='data.txntype="Reload"', disabled)
 			label Name of Item
-			input.txnitem(ng-model='data.txnitem', type='text', name='txnitem', ng-init='data.txnitem="Reload"', disabled)
+			input.txnitem(ng-model='data.txnitemid', type='text', name='txnitem', ng-init='data.txnitemid="1"', disabled)
 			label Quantity Bought
 			input.txnquantity(ng-model='data.txnquantity', type='text', name='txnquantity', ng-init='data.txnquantity="1"', disabled)
 			label Reload Amount
-			input.txnunitprice(ng-model='data.txnunitprice', type='text', name='txnunitprice', ng-change='changetxnunitprice()')
+			input.txnunitprice(ng-model='data.txnunitprice', type='text', name='txnunitprice', ng-change='changeTxnUnitPrice()')
 			label Total Amount
 			input.txntotalamount(ng-model='data.txntotalamount', type='text', name='txntotalamount', disabled)
 			div

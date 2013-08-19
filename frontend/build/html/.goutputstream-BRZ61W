@@ -1,0 +1,48 @@
+div(data-ng-init='submitGetBal()')
+	form.sample-form#home
+		.container-narrow
+			.jumbotron
+				h1 Hello Juan dela Cruz!
+				p.lead Your remaining balance is 
+					input.balance(ng-model='data.balance', type='text', style='height:40px', disabled)
+				br
+				br
+				br
+				
+
+		div
+			.row-fluid
+				.home
+					div
+						p.lead Please select an action:
+						div
+							.span2
+								a(href="/#/acctprofile")
+									img(src="/assets/nameplate.png")
+								h4 Account Profile
+						div
+							.span2
+								a(href="/#/transhist")
+									img(src="/assets/notes.png")
+								h4 Transaction History
+		br
+		a(href="/#/")
+			img(src="/assets/table-money-icon.png")
+		| Balance Inquiry
+		br
+		a(href="/#/reload")
+			img(src="/assets/money-add-icon.png")
+		| Reload
+		br
+		a(href="/#/lostcard")
+			img(src="/assets/user-thief-icon.png")
+		| Lost / Stolen Card
+
+		h3 Retailers' Module
+		a(href="/#/payment")
+			img(src="/assets/payment.png", height="40px", width="40px")
+		| Payment
+		br	
+		a(href="/#/items")
+			img(src="/assets/itemssold.jpg", height="40px", width="40px") 
+		| Items Being Sold

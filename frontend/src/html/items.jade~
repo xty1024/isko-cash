@@ -6,21 +6,21 @@ div
 			table
 				thead
 					tr
-						th Item
-						th Quantity
+						th Item ID
+						th Item Name
+						th Item Description
 						th Unit Price
-						th Total Amount
+						th Unit Measure
 						th Available Today?
 				tbody
 					tr(ng-repeat = 'item in items')
+						td {{item.itemid}}
 						td {{item.itemname}}
 						td {{item.itemdesc}}
 						td {{item.itemunitprice}}
 						td {{item.itemunitmeasure}}
 						td
-							input(type='checkbox', ng-checked='item.availabletoday')
-			div
-				button.btn#additemtoday-btn(ng-click='submitPutItemToday(user, $event)') Add These Items for Today
+							input(type='checkbox', ng-model='item.availabletoday', ng-click='submitPutItemsToday($event, item.itemid)')
 		p 
 			| Want to add an item? Please input the details of your item:
 			label Item ID

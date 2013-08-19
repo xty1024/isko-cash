@@ -1,0 +1,30 @@
+div(data-ng-init='submitGetBal()')
+	form.sample-form#home
+		h3 Welcome to the home page :-)
+		br
+		label(style='font-size:40px') Your Remaining Balance is:
+		br
+		input.balance(ng-model='data.balance', type='text', style='height:40px', disabled)
+		p.lead What do you want to do?	
+		<a href="/#/acctprofile"><img src="/assets/nameplate.png"></a>
+		| Account Profile
+		br	
+		<a href="/#/transhist"><img src="/assets/notes.png"></a>
+		| Transaction History
+		br
+		<a href="/#/"><img src="/assets/table-money-icon.png"></a>
+		| Balance Inquiry
+		br
+		<a href="/#/reload"><img src="/assets/money-add-icon.png"></a>
+		| Reload
+		br
+		<a href="/#/lostcard"><img src="/assets/user-thief-icon.png"></a>
+		| Lost / Stolen Card
+		h3 Retailers' Module
+		br	
+		<a href="/#/payment"><img src="/assets/payment.png", height=40px, width=40px></a>
+		| Payment
+		br	
+		a href="/#/items"
+			img src="/assets/itemssold.jpg", height=40px, width=40px
+    | Items Being Sold

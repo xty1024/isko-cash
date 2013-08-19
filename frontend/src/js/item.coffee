@@ -19,8 +19,10 @@ momentum.controller "ItemController", ['$scope', '$location', '$http', ($scope, 
     itemdesc: ""
     itemunitprice: ""
     itemunitmeasure: ""
+    availabletoday: ""
 
   $scope.items = [
+    itemid: ""
     itemname: ""
     itemdesc: ""
     itemunitprice: ""
@@ -43,7 +45,7 @@ momentum.controller "ItemController", ['$scope', '$location', '$http', ($scope, 
       alert "Something went wrong. The Vendor ID may not exist.\n" + e
 
   $scope.submitPostItem = ->
-    submitTxn = confirm "Do you want to add the item?"
+    submitTxn = confirm "Do you want to add the item to your Master List?"
     if submitTxn      
       $http.post("/api/item",
         vendorid: $scope.data.vendorid
@@ -52,15 +54,17 @@ momentum.controller "ItemController", ['$scope', '$location', '$http', ($scope, 
         itemunitprice: $scope.data.itemunitprice
         itemunitmeasure: $scope.data.itemunitmeasure
       ).success (response) ->
-        alert "Successfully completed adding item!"
+        alert "Successfully completed adding item to your Master List!"
       .error (response) ->
         alert "Something went wrong." + response
 
-  $scope.submitPutTxn = ->
-    $http.put("/api/item/#{$scope.data.id}",
-      message: $scope.data.message
+  $scope.submitPutItemsToday = ($event, itemid) ->
+    availabletoday = $event.target.checked
+    alert itemid + " " + availabletoday 
+    $http.put("/api/item/#{itemid}",
+      availabletoday: availabletoday
     ).success (response) ->
-      alert "Successfully updated a message!"
+      alert "Successfully added/removed " + response + " to Today's Available Items!"
     .error (response) ->
       alert "Something went wrong."
 

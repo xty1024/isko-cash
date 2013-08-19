@@ -1,0 +1,55 @@
+div
+	p	
+		strong Payment
+		p 
+			h4 Available Items for Today
+			| Click an Item to add it to the Order List
+			div(data-ng-init='submitGetAvailableItems()')			
+			table
+				tr(ng-repeat='itemavailable in itemsavailable')
+					td
+						button.btn#add-item-btn(ng-click='addItemOrder(itemavailable.itemname, itemavailable.itemunitprice, itemavailable.itemunitmeasure)') {{itemavailable.itemname}}
+		br
+		form.sample-form#txn-form
+			div
+				h4 Order List
+				table
+					thead
+						tr
+							th Item Name
+							th Unit Price
+							th Quantity
+							th Unit Measure
+							th Total Amount
+					tbody
+						tr(ng-repeat='item in itemsorder')
+							td {{item.txnitem}}
+							td {{item.txnunitprice}}
+							td {{item.txnquantity}}
+							td {{item.txnunitmeasure}}
+							td {{item.txntotalamount}}
+			br
+			div
+				button.btn#payment-btn(ng-click='submitPostTxn(user, $event)') Submit Payment
+
+			br
+			p Please input the details of your transaction?
+			label Transaction ID
+			input.txnid(ng-model='data.txnid', type='text', name='txnid', disabled)
+			label Student ID
+			input.studentID(ng-model='data.studentid', type='text', name='studentid')
+			label Vendor ID
+			input.vendorID(ng-model='data.vendorid', type='text', name='vendorid')
+			label Transaction Type
+			input.txntype(ng-model='data.txntype', type='text', name='txntype', ng-init='data.txntype="Payment"', disabled)
+			label Name of Item
+			input.txnitem(ng-model='data.txnitem', type='text', name='txnitem')
+			label Quantity Bought
+			input.txndetail(ng-model='data.txnquantity', type='text', name='txnquantity')
+			label Unit Price
+			input.txnunitprice(ng-model='data.txnunitprice', type='text', name='txnunitprice', ng-change='changeTxnUnitPrice()')
+			label Total Amount
+			input.txntotalamount(ng-model='data.txntotalamount', type='text', name='txntotalamount', disabled)
+			div
+				button.btn#add-item-btn(ng-click='addItem()') Add Item(s)
+

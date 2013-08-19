@@ -21,10 +21,12 @@
         itemname: "",
         itemdesc: "",
         itemunitprice: "",
-        itemunitmeasure: ""
+        itemunitmeasure: "",
+        availabletoday: ""
       };
       $scope.items = [
         {
+          itemid: "",
           itemname: "",
           itemdesc: "",
           itemunitprice: "",
@@ -49,7 +51,7 @@
       $scope.submitPostItem = function() {
         var submitTxn;
 
-        submitTxn = confirm("Do you want to add the item?");
+        submitTxn = confirm("Do you want to add the item to your Master List?");
         if (submitTxn) {
           return $http.post("/api/item", {
             vendorid: $scope.data.vendorid,
@@ -58,17 +60,21 @@
             itemunitprice: $scope.data.itemunitprice,
             itemunitmeasure: $scope.data.itemunitmeasure
           }).success(function(response) {
-            return alert("Successfully completed adding item!");
+            return alert("Successfully completed adding item to your Master List!");
           }).error(function(response) {
             return alert("Something went wrong." + response);
           });
         }
       };
-      $scope.submitPutTxn = function() {
-        return $http.put("/api/item/" + $scope.data.id, {
-          message: $scope.data.message
+      $scope.submitPutItemsToday = function($event, itemid) {
+        var availabletoday;
+
+        availabletoday = $event.target.checked;
+        alert(itemid + " " + availabletoday);
+        return $http.put("/api/item/" + itemid, {
+          availabletoday: availabletoday
         }).success(function(response) {
-          return alert("Successfully updated a message!");
+          return alert("Successfully added/removed " + response + " to Today's Available Items!");
         }).error(function(response) {
           return alert("Something went wrong.");
         });

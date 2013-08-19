@@ -8,8 +8,8 @@ class Transaction(Base):
     vendorid = Column(Integer)
     txndatetime = Column(DateTime)
     txntype = Column(String(25))
-    txnitem = Column(String(50))
-    txnquantity = Column(Integer)
+    txnitemid = Column(Integer)
+    txnquantity = Column(Numeric(precision=9, scale=6))
     txnunitprice = Column(Numeric(precision=9, scale=6))
     txntotalamount = Column(Numeric(precision=9, scale=6))
     balance = Column(Numeric(precision=9, scale=6))
@@ -29,7 +29,7 @@ class Item(Base):
     itemdesc = Column(String(100))
     itemunitprice = Column(Numeric(precision=9, scale=6))
     itemunitmeasure = Column(String(50))
-    itemavailabletoday = Column(Boolean, unique=False, default=False)
+    availabletoday = Column(Boolean, unique=False, default=False)
 
 class Message(Base):
     __tablename__ = 'messages'

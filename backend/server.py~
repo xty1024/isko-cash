@@ -110,6 +110,13 @@ def get_balance(studentid):
 #####################################################################################################
 
 
+@app.route('/transaction/<int:vendorid>/', strict_slashes=False)
+def get_availableitems(vendorid):
+    items = db_session.query(Item).filter_by(vendorid=str(vendorid), availabletoday=True)
+    jsonable = [{'itemid': itm.itemid, 'itemname': itm.itemname, 'itemdesc': itm.itemdesc, 'itemunitprice': str(itm.itemunitprice), 'itemunitmeasure': itm.itemunitmeasure} for itm in items]
+    return json.dumps(jsonable)
+
+
 @app.route('/transaction/<int:txnid>/', strict_slashes=False)
 def get_transaction(txnid):
     try:
@@ -128,7 +135,7 @@ def post_transaction():
     if consumer.status == 'Active':
       vendorid = request.json['vendorid']
       txntype = request.json['txntype']
-      txnitem = request.json['txnitem']
+      txnitemid = request.json['txnitemid']
       txnquantity = request.json['txnquantity']
       txnunitprice = request.json['txnunitprice']
       txntotalamount = request.json['txntotalamount']
@@ -137,7 +144,7 @@ def post_transaction():
         balance = lasttxn.balance + Decimal(txntotalamount)
       else:
         balance = lasttxn.balance - Decimal(txntotalamount)
-      txn = Transaction(studentid=studentid, vendorid=vendorid, txndatetime=datetime.utcnow(), txntype=txntype, txnitem=txnitem, txnquantity=txnquantity, txnunitprice=txnunitprice, txntotalamount=txntotalamount, balance=balance)
+      txn = Transaction(studentid=studentid, vendorid=vendorid, txndatetime=datetime.utcnow(), txntype=txntype, txnitemid=txnitemid, txnquantity=Decimal(txnquantity), txnunitprice=txnunitprice, txntotalamount=txntotalamount, balance=balance)
       db_session.add(txn)
       db_session.commit()
       return str(txn.balance)
@@ -158,7 +165,7 @@ def post_transaction():
 #####################################################################################################
 #
 #
-# Functions related to LOST CARD
+# Beginning of Functions related to LOST CARD
 #
 #
 #####################################################################################################
@@ -222,6 +229,19 @@ def post_item():
     db_session.add(item)
     db_session.commit()
     return str(item.itemid)
+
+
+@app.route('/item/<int:itemid>/', methods=['PUT'], strict_slashes=False)
+def put_item(itemid):
+    try:
+        item = db_session.query(Item).filter_by(itemid=itemid).one()
+        item.availabletoday = request.json['availabletoday'] # See note above about request.form
+        db_session.add(item)
+        db_session.commit()
+        return str(item.itemname)
+    except sqlalchemy.orm.exc.NoResultFound:
+        return 'Item does not exist', 404
+
 
 #####################################################################################################
 #

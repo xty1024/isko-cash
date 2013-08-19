@@ -5,24 +5,33 @@ div(data-ng-init='submitGetBal()')
 		label(style='font-size:40px') Your Remaining Balance is:
 		br
 		input.balance(ng-model='data.balance', type='text', style='height:40px', disabled)
+
 		p.lead What do you want to do?	
-		<a href="/#/"> <img src="/assets/nameplate.png"> </a>
+		a (href="/#/acctprofile")
+			img (src="/assets/nameplate.png")
 		| Account Profile
 		br	
-		<a href="/#/transhist"> <img src="/assets/notes.png"> </a>
+		a (href="/#/transhist")
+			img (src="/assets/notes.png")
 		| Transaction History
 		br
-		<a href="/#/"> <img src="/assets/table-money-icon.png"> </a>
+		a (href="/#/")
+			img (src="/assets/table-money-icon.png")
 		| Balance Inquiry
 		br
-		<a href="/#/reload"> <img src="/assets/money-add-icon.png"> </a>
+		a (href="/#/reload")
+			img (src="/assets/money-add-icon.png")
 		| Reload
 		br
-		<a href="/#/lostcard"> <img src="/assets/user-thief-icon.png"> </a>
+		a (href="/#/lostcard")
+			img (src="/assets/user-thief-icon.png")
 		| Lost / Stolen Card
+
 		h3 Retailers' Module
-		br	
-		<a href="/#/payment"> <img src="/assets/payment.png"> </a>
+		a (href="/#/payment")
+			img (src="/assets/payment.png", height="40px", width="40px")
 		| Payment
 		br	
-		<a href="/#/items"> <img src="/assets/itemssold.jpg"> </a> Items Being Sold
+		a (href="/#/items")
+			img (src="/assets/itemssold.jpg", height="40px", width="40px") 
+		| Items Being Sold

@@ -69,31 +69,25 @@ momentum.controller "TxnController", ['$scope', '$location', '$http', ($scope, $
 
   $scope.submitPostTxn = ->
     submitTxn = confirm "Do you want to submit the transaction?"
-    orderListEmpty = $scope.itemsorder.length
-    alert orderListEmpty
+    orderListEmpty = !!$scope.itemsorder    
     if submitTxn
-
       # For RELOAD (Using Consumer Module Only)
-
-      if orderListEmpty = 1
+      if orderListEmpty
         alert "List empty."
         $http.post("/api/transaction",
           studentid: $scope.data.studentid
           vendorid: $scope.data.vendorid
           txntype: $scope.data.txntype
-          txnitemid: $scope.data.txnitemid
-          txnquantity: $scope.data.txnquantity
-          txnunitprice: $scope.data.txnunitprice
-          txntotalamount: $scope.data.txntotalamount
+          txnitemid: itemorder.txnitemid
+          txnquantity: itemorder.txnquantity
+          txnunitprice: itemorder.txnunitprice
+          txntotalamount: itemorder.txntotalamount
         ).success (response) ->
           if response.length > 20      
             alert "Cannot complete reload. \n" + response
           else
             alert "Successfully completed reload! \n" + $scope.data.studentid + " remaining balance is now: Php " + response
             $location.path("/home").replace()
-
-      # For PAYMENT (Using Retailer Module Only)
-
       else
         alert "List not empty."
         $scope.itemsorder.forEach (itemorder) ->

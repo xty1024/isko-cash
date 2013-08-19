@@ -20,7 +20,7 @@
         studentid: "201354321",
         vendorid: "2",
         txntype: "",
-        txnitemid: "",
+        txnitem: "",
         txnquantity: "",
         txnunitprice: "",
         txntotalamount: ""
@@ -36,8 +36,7 @@
       ];
       $scope.itemsorder = [
         {
-          txnitemid: "",
-          txnitemname: "",
+          txnitem: "",
           txnunitprice: "",
           txnquantity: "",
           txnunitmeasure: "",
@@ -47,25 +46,26 @@
       $scope.changeTxnUnitPrice = function() {
         return $scope.data.txntotalamount = $scope.data.txnunitprice * $scope.data.txnquantity;
       };
+      $scope.addItemOrder = function(txnitem, txnunitprice, txnunitmeasure) {
+        $scope.itemsorder.txnquantity = prompt("Enter Quantity for '" + txnitem + "' : ");
+        $scope.itemsorder.txntotalamount = $scope.itemsorder.txnquantity * txnunitprice;
+        $scope.itemsorder.push({
+          txnitem: txnitem,
+          txnunitprice: txnunitprice,
+          txnquantity: $scope.itemsorder.txnquantity,
+          txnunitmeasure: txnunitmeasure,
+          txntotalamount: $scope.itemsorder.txntotalamount
+        });
+        $scope.data.txnitem = "";
+        $scope.data.txnquantity = "";
+        $scope.data.txnunitprice = "";
+        return $scope.data.txntotalamount = "";
+      };
       $scope.submitGetAvailableItems = function() {
         return $http.get("/api/transaction/" + $scope.data.vendorid).success(function(response) {
           return $scope.itemsavailable = response;
         }).error(function(e) {
           return alert("Something went wrong.\n" + e);
-        });
-      };
-      $scope.addItemOrder = function(txnitemid, txnitemname, txnunitprice, txnunitmeasure) {
-        var txnquantity, txntotalamount;
-
-        txnquantity = prompt("Enter Quantity for '" + txnitemname + "' : ");
-        txntotalamount = txnquantity * txnunitprice;
-        return $scope.itemsorder.push({
-          txnitemid: txnitemid,
-          txnitemname: txnitemname,
-          txnunitprice: txnunitprice,
-          txnquantity: txnquantity,
-          txnunitmeasure: txnunitmeasure,
-          txntotalamount: txntotalamount
         });
       };
       $scope.submitGetTxn = function() {
@@ -76,55 +76,29 @@
         });
       };
       $scope.submitPostTxn = function() {
-        var orderListEmpty, submitTxn;
+        var submitTxn;
 
         submitTxn = confirm("Do you want to submit the transaction?");
-        orderListEmpty = $scope.itemsorder.length;
         if (submitTxn) {
-          if (orderListEmpty = 1) {
-            alert("List empty.");
-            return $http.post("/api/transaction", {
-              studentid: $scope.data.studentid,
-              vendorid: $scope.data.vendorid,
-              txntype: $scope.data.txntype,
-              txnitemid: $scope.data.txnitemid,
-              txnquantity: $scope.data.txnquantity,
-              txnunitprice: $scope.data.txnunitprice,
-              txntotalamount: $scope.data.txntotalamount
-            }).success(function(response) {
-              if (response.length > 20) {
-                return alert("Cannot complete reload. \n" + response);
-              } else {
-                alert("Successfully completed reload! \n" + $scope.data.studentid + " remaining balance is now: Php " + response);
-                return $location.path("/home").replace();
-              }
-            });
-          } else {
-            alert("List not empty.");
-            return $scope.itemsorder.forEach(function(itemorder) {
-              if (itemorder.txnitemid > 0) {
-                return $http.post("/api/transaction", {
-                  studentid: $scope.data.studentid,
-                  vendorid: $scope.data.vendorid,
-                  txntype: $scope.data.txntype,
-                  txnitemid: itemorder.txnitemid,
-                  txnquantity: itemorder.txnquantity,
-                  txnunitprice: itemorder.txnunitprice,
-                  txntotalamount: itemorder.txntotalamount
-                }).success(function(response) {
-                  if (response.length > 20) {
-                    return alert("Cannot complete transaction. \n" + response);
-                  } else {
-                    alert("Successfully completed transaction! \n" + $scope.data.studentid + " remaining balance is now: Php " + response);
-                    return $location.path("/home").replace();
-                  }
-                });
-              }
-            });
-          }
+          $http.post("/api/transaction", {
+            studentid: $scope.data.studentid,
+            vendorid: $scope.data.vendorid,
+            txntype: $scope.data.txntype,
+            txnitem: $scope.data.txnitem,
+            txnquantity: $scope.data.txnquantity,
+            txnunitprice: $scope.data.txnunitprice,
+            txntotalamount: $scope.data.txntotalamount
+          }).success(function(response) {
+            if (response.length > 20) {
+              return alert("Cannot complete transaction. \n" + response);
+            } else {
+              return alert("Successfully completed transaction! \nYour balance is now: Php " + response);
+            }
+          });
         } else {
-          return alert("Did not submit transaction.");
+          alert("Did not submit transaction.");
         }
+        return $location.path("/home").replace();
       };
       $scope.submitPutTxn = function() {
         return $http.put("/api/reload/" + $scope.data.id, {

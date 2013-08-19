@@ -7,7 +7,7 @@ StudentID varchar(9),
 VendorID varchar(9),
 TxnDateTime timestamp,
 TxnType varchar(25),
-TxnItem varchar(50),
+TxnItemID int,
 TxnQuantity int,
 TxnUnitPrice decimal,
 TxnTotalAmount decimal,
@@ -21,5 +21,6 @@ VendorID varchar(9),
 ItemName varchar(50),
 ItemDesc varchar(100),
 ItemUnitPrice decimal,
-ItemUnitMeasure varchar(50)
+ItemUnitMeasure varchar(50),
+AvailableToday boolean
 );

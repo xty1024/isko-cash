@@ -36,4 +36,7 @@ body
 
 .home
   text-align center
-  margin 60px auto
+  margin 60px 0
+
+.home span2
+  width 300px
