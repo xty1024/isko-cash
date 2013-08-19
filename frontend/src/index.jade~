@@ -23,27 +23,13 @@ html(ng-app="Momentum")
     script(src='/js/balance.js', type='text/javascript')
     script(src='/js/item.js', type='text/javascript')
 
-    style(type="text/css")
-      .container-narrow > hr {
-        margin: 30px 0;
-      }
-
-      .jumbotron {
-        margin: 60px 0;
-        text-align: center;
-      }
-      
-      .jumbotron h1 {
-        font-size: 50px;
-        line-height: 1;
-      }
-
   body
-    .container
-      .row
-      h1
-        a(href="/#/home") 
-          | iskocash
+    div
+      .navbar
+        .navbar-fixed-top
+          .navbar-maroon
+            .container-fluid            
+              a.brand(href="/#/home") iskocash
       p.lead Cashless transactions within the campus.
       div(ng-view)
 

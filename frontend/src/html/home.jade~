@@ -11,27 +11,27 @@ div(data-ng-init='submitGetBal()')
 						div
 							p.lead Please select an action (Consumers' Module):
 							div
-								.span3
+								.span-one-fifth
 									a(href="/#/acctprofile")
 										img(src="/assets/nameplate.png")
 									h4 Account Profile
 							div
-								.span3
+								.span-one-fifth
 									a(href="/#/transhist")
 										img(src="/assets/notes.png")
 									h4 Transaction History
 							div
-								.span3
+								.span-one-fifth
 									a(href="/#/")
 										img(src="/assets/table-money-icon.png")
 									h4 Balance Inquiry
 							div
-								.span3
+								.span-one-fifth
 									a(href="/#/reload")
 										img(src="/assets/money-add-icon.png")
 									h4 Reload
 							div
-								.span3
+								.span-one-fifth
 									a(href="/#/lostcard")
 										img(src="/assets/user-thief-icon.png")
 									h4 Lost / Stolen Card

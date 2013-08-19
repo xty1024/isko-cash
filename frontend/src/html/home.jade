@@ -1,37 +1,38 @@
 div(data-ng-init='submitGetBal()')
 	form.sample-form#home
 		.container-narrow
-			.jumbotron
-				h1 Hello Juan dela Cruz!
-				p.lead Your remaining balance is 
-					input.balance(ng-model='data.balance', type='text', style='height:40px', disabled)
+			.hero-unit
+				.jumbotron
+					h1 Hello Juan dela Cruz!
+					p.lead Your remaining balance is 
+						input.balance(ng-model='data.balance', type='text', style='height:40px', disabled)
 			div
 				.row-fluid
 					.home
 						div
 							p.lead Please select an action (Consumers' Module):
 							div
-								.span2
+								.span-one-fifth
 									a(href="/#/acctprofile")
 										img(src="/assets/nameplate.png")
 									h4 Account Profile
 							div
-								.span2
+								.span-one-fifth
 									a(href="/#/transhist")
 										img(src="/assets/notes.png")
 									h4 Transaction History
 							div
-								.span2
+								.span-one-fifth
 									a(href="/#/")
 										img(src="/assets/table-money-icon.png")
 									h4 Balance Inquiry
 							div
-								.span2
+								.span-one-fifth
 									a(href="/#/reload")
 										img(src="/assets/money-add-icon.png")
 									h4 Reload
 							div
-								.span2
+								.span-one-fifth
 									a(href="/#/lostcard")
 										img(src="/assets/user-thief-icon.png")
 									h4 Lost / Stolen Card

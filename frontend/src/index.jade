@@ -24,11 +24,12 @@ html(ng-app="Momentum")
     script(src='/js/item.js', type='text/javascript')
 
   body
-    .container
-      .row
-      h1
-        a(href="/#/home") 
-          | iskocash
+    div
+      .navbar
+        .navbar-fixed-top
+          .navbar-maroon
+            .container-fluid     
+              a.brand(href="/#/home") iskocash
       p.lead Cashless transactions within the campus.
       div(ng-view)
 
